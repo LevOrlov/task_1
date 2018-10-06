@@ -20,6 +20,7 @@ public class UserServlet extends HttpServlet {
         forward = LIST_USER;
 
         request.setAttribute("users", dao.getAllUsers());
+        System.out.println();
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
        view.forward(request, response);
