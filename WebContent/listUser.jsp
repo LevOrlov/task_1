@@ -21,20 +21,22 @@
         <th colspan=2>Action</th>
     </tr>
     </thead>
+    <tbody>
+    <c:forEach items="${users}" var="user">
+        <tr>
+            <td><c:out value="${user.getId()}" /></td>
+            <td><c:out value="${user.getName()}" /></td>
+            <td><c:out value="${user.getPassword()}" /></td>
+
+            <td><c:out value="${user.getLogin()}" /></td>
+            <td><a href="UserServlet?action=edit&userId=<c:out value="${user.getId()}"/>">Update</a></td>
+            <td><a href="UserServlet?action=delete&userId=<c:out value="${user.getId()}"/>">Delete</a></td>
+        </tr>
+    </c:forEach>
+    </tbody>
 
 </table>
-<h2><%
-    // retrieve your list from the request, with casting
-    ArrayList<User> list = new ArrayList<>();
-    list = (ArrayList<User>) request.getAttribute("users");
 
-// print the information about every category of the list
-    for(User user : list) {
-        out.println(user.getId());
-        out.println(user.getName());
-
-    }
-%></h2>
 <p><a href="login.html">Add User</a></p>
 </body>
 </html>
