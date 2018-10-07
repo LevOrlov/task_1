@@ -18,19 +18,20 @@ public class UserDao {
 
     }
 
-    public void deleteUser(User application) {
+    public void deleteUser(int userId) {
         Session session = hibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        session.delete(application);
+        User user = (User) session.load(User.class, userId);
+        session.delete(user);
         session.getTransaction().commit();
-
 
     }
 
-    public void updateUser(User application) {
+    public void updateUser(int userId) {
         Session session = hibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        session.saveOrUpdate(application);
+        User user = (User) session.load(User.class, userId);
+        session.saveOrUpdate(user);
         session.getTransaction().commit();
     }
 
@@ -38,15 +39,17 @@ public class UserDao {
         Session session = hibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         List<User> list = session.createCriteria(User.class).list();
+        session.getTransaction().commit();
+
         return list;
+
     }
 
     public User getUserById(int userId) {
         Session session = hibernateUtil.getSessionFactory().getCurrentSession();
-
         session.beginTransaction();
         User result = (User) session.load(User.class, userId);
-        session.getTransaction().commit();
+
         return result;
     }
 

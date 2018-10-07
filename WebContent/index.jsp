@@ -6,33 +6,10 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-    <title>Title</title>
+    <title>Index</title>
 </head>
 <body>
-<table border=1>
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Login</th>
-        <th>Password</th>
-        <th colspan=2>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach items="${users}" var="user">
-        <tr>
-            <td><c:out value="${user.userid}" /></td>
-            <td><c:out value="${user.firstName}" /></td>
-            <td><c:out value="${user.lastName}" /></td>
-            <td><fmt:formatDate pattern="yyyy-MMM-dd" value="${user.dob}" /></td>
-            <td><c:out value="${user.email}" /></td>
-            <td><a href="UserController?action=edit&userId=<c:out value="${user.userid}"/>">Update</a></td>
-            <td><a href="UserController?action=delete&userId=<c:out value="${user.userid}"/>">Delete</a></td>
-        </tr>
-    </c:forEach>
-    </tbody>
-</table>
-<p><a href="UserServlet">Add User</a></p>
+
+<p><a href="UserServlet?action=edit1">Начнем...</a></p>
 </body>
 </html>

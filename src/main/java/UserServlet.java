@@ -7,41 +7,43 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
+
 @WebServlet("/UserServlet")
 public class UserServlet extends HttpServlet {
     private static String LIST_USER = "/listUser.jsp";
+    private static String INSERT_OR_EDIT = "/edit.jsp";
     private UserDao dao =new UserDao();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //RequestDispatcher rd = req.getRequestDispatcher("/login.html");
-        String forward="";
-        //String action = request.getParameter("action");
-        forward = LIST_USER;
 
+        String forward="";
         request.setAttribute("users", dao.getAllUsers());
-        System.out.println();
+        String action = request.getParameter("action");
+
+        if (action.equalsIgnoreCase("delete")){
+            int userId = Integer.parseInt(request.getParameter("userId"));
+            dao.deleteUser(userId);
+            forward = LIST_USER;
+            request.setAttribute("users", dao.getAllUsers());
+        } else if (action.equalsIgnoreCase("edit")){
+            int userId = Integer.parseInt(request.getParameter("userId"));
+            User user = dao.getUserById(userId);
+            forward = INSERT_OR_EDIT;
+            request.setAttribute("user", user);}
+
+        else {
+            forward = LIST_USER;
+        }
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
-       view.forward(request, response);
-//
-      //  RequestDispatcher rd = req.getRequestDispatcher("/LoginSuccess.jsp");
-        //rd.forward(req, resp);
-      //  resp.sendRedirect("/LoginSuccess.jsp");
+        view.forward(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
-        //RequestDispatcher rd = req.getRequestDispatcher("/login.html");
-        String forward="";
-        //String action = request.getParameter("action");
-        forward = LIST_USER;
-        request.setAttribute("users", dao.getAllUsers());
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User user = new User();
+      //  user.setFirstName(request.getParameter("firstName"));
+       // user.setLastName(request.getParameter("lastName"));
 
-        RequestDispatcher view = request.getRequestDispatcher(forward);
-        view.forward(request, resp);
-        //  RequestDispatcher rd = req.getRequestDispatcher("/LoginSuccess.jsp");
-        //rd.forward(req, resp);
-        //  resp.sendRedirect("/LoginSuccess.jsp");
     }
 }

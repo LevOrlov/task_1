@@ -1,5 +1,3 @@
-<%@ page import="main.java.User" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -8,13 +6,13 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-    <title>Title</title>
+    <title>listUser</title>
 </head>
 <body>
 <table border=1>
     <thead>
     <tr>
-        <th>Id!!!!!</th>
+        <th>Id</th>
         <th>Name</th>
         <th>Login</th>
         <th>Password</th>
@@ -22,12 +20,12 @@
     </tr>
     </thead>
     <tbody>
+    <%--@elvariable id="users" type="java.util.List"--%>
     <c:forEach items="${users}" var="user">
         <tr>
             <td><c:out value="${user.getId()}" /></td>
             <td><c:out value="${user.getName()}" /></td>
             <td><c:out value="${user.getPassword()}" /></td>
-
             <td><c:out value="${user.getLogin()}" /></td>
             <td><a href="UserServlet?action=edit&userId=<c:out value="${user.getId()}"/>">Update</a></td>
             <td><a href="UserServlet?action=delete&userId=<c:out value="${user.getId()}"/>">Delete</a></td>
