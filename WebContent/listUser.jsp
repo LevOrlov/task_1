@@ -35,6 +35,6 @@
 
 </table>
 
-<p><a href="login.html">Add User</a></p>
+<p><a href="UserServlet?action=add">Add User</a></p>
 </body>
 </html>

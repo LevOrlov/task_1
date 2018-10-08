@@ -11,7 +11,7 @@ public class UserDao {
 
 
     public void addUser(User application) {
-        Session session = hibernateUtil.getSessionFactory().getCurrentSession();
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         Integer result = (Integer) session.save(application);
         session.getTransaction().commit();
@@ -19,7 +19,7 @@ public class UserDao {
     }
 
     public void deleteUser(int userId) {
-        Session session = hibernateUtil.getSessionFactory().getCurrentSession();
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         User user = (User) session.load(User.class, userId);
         session.delete(user);
@@ -27,31 +27,31 @@ public class UserDao {
 
     }
 
-    public void updateUser(int userId) {
-        Session session = hibernateUtil.getSessionFactory().getCurrentSession();
+    public void updateUser(User application) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        User user = (User) session.load(User.class, userId);
+        User user = application;
         session.saveOrUpdate(user);
         session.getTransaction().commit();
     }
 
     public List<User> getAllUsers() {
-        Session session = hibernateUtil.getSessionFactory().getCurrentSession();
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         List<User> list = session.createCriteria(User.class).list();
         session.getTransaction().commit();
-
         return list;
 
     }
 
     public User getUserById(int userId) {
-        Session session = hibernateUtil.getSessionFactory().getCurrentSession();
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         User result = (User) session.load(User.class, userId);
-
+        session.getTransaction().commit();
         return result;
     }
+
 
 
 }

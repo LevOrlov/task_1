@@ -1,5 +1,6 @@
 package main.java;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
@@ -11,7 +12,8 @@ import javax.transaction.Transactional;
 @Proxy(lazy=false)
 public class User {
     @Id
-
+    @GenericGenerator(name="kaugen" , strategy="increment")
+    @GeneratedValue(generator="kaugen")
     @Column(name="id")
     private int id;
     @Column(name="name")
