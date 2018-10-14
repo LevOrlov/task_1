@@ -7,20 +7,15 @@ import javax.persistence.*;
 import javax.transaction.Transactional;
 
 
-@Entity
-@Table(name= "apl")
-@Proxy(lazy=false)
+
 public class User {
-    @Id
-    @GenericGenerator(name="kaugen" , strategy="increment")
-    @GeneratedValue(generator="kaugen")
-    @Column(name="id")
+
     private int id;
-    @Column(name="name")
+
     private String name;
-    @Column(name="login")
+
     private String login;
-    @Column(name="password")
+
     private String password;
 
 

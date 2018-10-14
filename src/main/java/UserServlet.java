@@ -61,7 +61,7 @@ public class UserServlet extends HttpServlet {
         view.forward(request, response);
     } else if (action.equalsIgnoreCase("add")){
             User user = new User();
-            user.setName(request.getParameter("name"));
+             user.setName(request.getParameter("name"));
             user.setLogin(request.getParameter("login"));
             user.setPassword(request.getParameter("password"));
             dao.addUser(user);
